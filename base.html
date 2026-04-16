@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Neural Translator</title>
+  <!-- We link to the new style.css -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+  <!-- Floating Navigation Bar -->
+  <nav>
+    <h2>Neural Translator</h2>
+    <div>
+      {% if user.is_authenticated %}
+      <span>OPERATOR: {{ user.username }}</span>
+      <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit"
+          style="background: none; border: none; color: inherit; cursor: pointer; font-weight: 600; font-family: inherit; font-size: 0.9rem; padding: 8px 16px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;">
+          Disconnect
+        </button>
+      </form>
+      {% else %}
+      <a href="{% url 'login' %}">Initialize Link (Login)</a>
+      <a href="{% url 'register' %}">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- Main App Content -->
+  <main>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% block content %} {% endblock %}
+  </main>
+</body>
+
+</html>

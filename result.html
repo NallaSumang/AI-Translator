@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="glass-container">
+  <h1>Translation Complete</h1>
+  <p class="subtitle">Your document has been successfully processed.</p>
+
+  <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; margin-bottom: 25px;">
+    <p style="color: #fff; margin-bottom: 10px;"><strong>Project:</strong> {{ file.original_file.name }}</p>
+    <p style="color: #fff;"><strong>Language:</strong> {{ file.target_lang }}</p>
+  </div>
+
+  <a href="{{ file.translated_file.url }}" download style="text-decoration: none;">
+    <button class="neon-btn">Download Translated Document</button>
+  </a>
+
+  <div class="auth-links">
+    <a href="{% url 'translator' %}">&laquo; Run another translation</a>
+  </div>
+</div>
+{% endblock %}

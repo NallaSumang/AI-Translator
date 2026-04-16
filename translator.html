@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="glass-container translator-container">
+  <h1>Neural Translator</h1>
+  <p class="subtitle">
+    Upload source data (.docx) and specify the target language (8 available). The engine will reconstruct the document.
+  </p>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label>Target Language Protocol:</label>
+      {{ form.target_lang }}
+    </div>
+
+    <div class="form-group">
+      <label>Source Document Context:</label>
+      {{ form.original_file }}
+    </div>
+
+    <button type="submit" class="neon-btn">
+      Initiate Translation Sequence
+    </button>
+  </form>
+</div>
+{% endblock %}
